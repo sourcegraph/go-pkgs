@@ -9,19 +9,32 @@ import (
 )
 
 func TestFindAll(t *testing.T) {
-	expected := []*build.Package{
-		{ImportPath: "a"},
-		{ImportPath: "b"},
-		{ImportPath: "b/c"},
+	tests := map[string][]*build.Package{
+		"": []*build.Package{
+			{ImportPath: "a"},
+			{ImportPath: "b"},
+			{ImportPath: "b/c"},
+		},
+		"a": []*build.Package{
+			{ImportPath: "a"},
+		},
+		"b": []*build.Package{
+			{ImportPath: "b"},
+			{ImportPath: "b/c"},
+		},
+		"x": []*build.Package{},
 	}
 
 	buildContext := build.Default
 	buildContext.GOPATH, _ = filepath.Abs("testdata/")
-	actual, err := FindAll(buildContext, 0)
-	if err != nil {
-		t.Fatalf("FindAll failed: %v", err)
+
+	for prefix, expected := range tests {
+		actual, err := FindAll(prefix, buildContext, 0)
+		if err != nil {
+			t.Fatalf("FindAll with prefix %#v failed: %v", err)
+		}
+		packageListsImportPathsAreEqual(t, actual, expected)
 	}
-	packageListsImportPathsAreEqual(t, actual, expected)
 }
 
 func packageListsImportPathsAreEqual(t *testing.T, actual []*build.Package, expected []*build.Package) {

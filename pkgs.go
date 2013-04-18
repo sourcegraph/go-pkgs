@@ -19,8 +19,9 @@ const (
 )
 
 // FindAll returns a list of all packages in all of the GOPATH trees
-// in the given build context.
-func FindAll(buildContext build.Context, mode FindMode) (pkgs []*build.Package, err error) {
+// in the given build context. If prefix is non-empty, only packages
+// whose import paths begin with prefix are returned.
+func FindAll(prefix string, buildContext build.Context, mode FindMode) (pkgs []*build.Package, err error) {
 	have := map[string]bool{
 		"builtin": true, // ignore pseudo-package that exists only for documentation
 	}
@@ -37,7 +38,8 @@ func FindAll(buildContext build.Context, mode FindMode) (pkgs []*build.Package, 
 			continue // skip stdlib
 		}
 		src = filepath.Clean(src) + string(filepath.Separator)
-		filepath.Walk(src, func(path string, fi os.FileInfo, err error) error {
+		start := filepath.Join(src, prefix)
+		filepath.Walk(start, func(path string, fi os.FileInfo, err error) error {
 			if err != nil || !fi.IsDir() || path == src {
 				return nil
 			}
@@ -48,7 +50,7 @@ func FindAll(buildContext build.Context, mode FindMode) (pkgs []*build.Package, 
 				return filepath.SkipDir
 			}
 
-			name := filepath.ToSlash(path[len(src):])
+			name := filepath.ToSlash(path[len(start):])
 			if have[name] {
 				return nil
 			}
