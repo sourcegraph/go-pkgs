@@ -19,5 +19,5 @@ Docs: [godoc.org/github.com/sqs/go-pkgs](http://godoc.org/github.com/sqs/go-pkgs
         "go/build
     )
 
-    # List all packages in all GOPATH trees.
+    // List all packages in all GOPATH trees.
     pkglist, err := pkgs.FindAll("", build.Default, 0)
