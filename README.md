@@ -21,3 +21,7 @@ Docs: [godoc.org/github.com/sqs/go-pkgs](http://godoc.org/github.com/sqs/go-pkgs
 
     // List all packages in all GOPATH trees.
     pkglist, err := pkgs.FindAll("", build.Default, 0)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sqs/go-pkgs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
