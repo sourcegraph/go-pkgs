@@ -6,16 +6,16 @@ packages` for more info).
 
 Much of the code was adapted from the cmd/go `matchPackages` func.
 
-Docs: [godoc.org/github.com/sqs/go-pkgs](http://godoc.org/github.com/sqs/go-pkgs)
+Docs: [go-pkgs on Sourcegraph](https://sourcegraph.com/repos/github.com/sourcegraph/go-pkgs)
 
 ## Installation
 
-	go get github.com/sqs/go-pkgs
+	go get github.com/sourcegraph/go-pkgs
 
 ## Example Usage
 
     import (
-        "github.com/sqs/go-pkgs"
+        "github.com/sourcegraph/go-pkgs"
         "go/build
     )
 
