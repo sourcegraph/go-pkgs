@@ -6,7 +6,7 @@ packages` for more info).
 
 Much of the code was adapted from the cmd/go `matchPackages` func.
 
-Docs: [go-pkgs on Sourcegraph](https://sourcegraph.com/repos/github.com/sourcegraph/go-pkgs)
+Docs: [go-pkgs on Sourcegraph](https://sourcegraph.com/github.com/sourcegraph/go-pkgs)
 
 ## Installation
 
